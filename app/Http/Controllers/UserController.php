@@ -18,7 +18,7 @@ class UserController extends Controller
         if (!$user || !Hash::check($request->password, $user->password)) {
             return "Username or Password Is Not Matched.";
         } else {
-            Session::put('user', $user);
+          $request->session()->put('user',$user);
             return redirect('/');
         }
     }
