@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Http\Request;
+
 use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
@@ -12,12 +13,11 @@ class UserController extends Controller
     {
         // return $request->input();
         // return User::where(['email'=>$request->email])->first();
-        $user= User::where(['email'=>$request->email])->first();
-        // return $user->password;
-        if(!$user || !Hash::check($request->password,$user->password))
-        {
+        $user = User::where(['email' => $request->email])->first();
+
+        if (!$user || !Hash::check($request->password, $user->password)) {
             return "Username or Password Is Not Matched.";
-        }else{
+        } else {
             Session::put('user', $user);
             return redirect('/');
         }
